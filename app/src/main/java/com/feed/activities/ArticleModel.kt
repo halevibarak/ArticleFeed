@@ -39,8 +39,8 @@ class ArticleModel(application: Application) : AndroidViewModel(application) {
         subscription!!.unsubscribe()
     }
 
-    fun refreshData() {
-        if (System.currentTimeMillis() > mTmeStamp + 2000 ){
+    fun refreshDataIfNeeded() {
+        if (System.currentTimeMillis() > mTmeStamp + 5000 ){
             ArticleList = JsonLiveData()
         }
     }

@@ -101,7 +101,7 @@ class MainFragment : Fragment(), DescriptionInterface {
 
     override fun onResume() {
         super.onResume()
-        postModel!!.refreshData()
+        postModel!!.refreshDataIfNeeded()
 
     }
 
