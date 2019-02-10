@@ -2,7 +2,7 @@
 
 Kotlin
 
-Fragments screens for performance
+Fragments screens
 
 MVVM - LiveData
 
