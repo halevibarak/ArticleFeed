@@ -55,7 +55,7 @@ class ArticleModel(application: Application) : AndroidViewModel(application) {
         private fun LoadData() {
             val service = RxApplication.instance_!!.networkService
             val articleResponseObservable = service!!.articleAPI.articles
-            Log.e("netwo", "netwo")
+            Log.d("network", "network network network network network network network ")
             mTmeStamp = System.currentTimeMillis()
             subscription = articleResponseObservable.observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
