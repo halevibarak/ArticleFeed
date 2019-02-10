@@ -1,4 +1,4 @@
-package com.mvvm.adapter;
+package com.feed.adapter;
 
 import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
@@ -9,9 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.mvvm.R;
-import com.mvvm.interfaces.DescriptionInterface;
-import com.mvvm.model.Article;
+import com.feed.R;
+import com.feed.interfaces.DescriptionInterface;
+import com.feed.model.Article;
 
 import java.text.DateFormat;
 import java.text.ParseException;

@@ -1,6 +1,6 @@
-package com.mvvm.application
+package com.feed.application
 
-import com.mvvm.model.ArticleResponse
+import com.feed.model.ArticleResponse
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory

@@ -5,11 +5,11 @@ android {
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
     defaultConfig {
-        applicationId "com.test.halevi.barakapp"
+        applicationId "com.feed"
         minSdkVersion 18
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -51,7 +51,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.1.13'
-    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.googl' +
+            'e.code.gson:gson:2.8.2'
     implementation 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 

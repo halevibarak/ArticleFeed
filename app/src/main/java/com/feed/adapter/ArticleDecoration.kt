@@ -1,4 +1,4 @@
-package com.mvvm.adapter
+package com.feed.adapter
 
 import android.graphics.Rect
 import android.support.v7.widget.RecyclerView

@@ -1,11 +1,11 @@
-package com.mvvm.activities
+package com.feed.activities
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.*
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import com.mvvm.R
+import com.feed.R
 
 
 class WebFragment : Fragment() {
@@ -49,4 +49,8 @@ class WebFragment : Fragment() {
         const val LINK = "LINK"
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mWebView=null
+    }
 }

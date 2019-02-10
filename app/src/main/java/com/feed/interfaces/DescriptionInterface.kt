@@ -1,4 +1,4 @@
-package com.mvvm.interfaces
+package com.feed.interfaces
 
 /**
  * Created by Barak on 24/08/2017.

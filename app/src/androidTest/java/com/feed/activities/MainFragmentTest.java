@@ -1,4 +1,4 @@
-package com.mvvm.activities;
+package com.feed.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,7 +8,7 @@ import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.v7.widget.RecyclerView;
 
-import com.mvvm.R;
+import com.feed.R;
 
 import org.junit.Before;
 import org.junit.Rule;

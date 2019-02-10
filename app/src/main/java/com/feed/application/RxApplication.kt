@@ -1,4 +1,4 @@
-package com.mvvm.application
+package com.feed.application
 
 import android.app.Application
 

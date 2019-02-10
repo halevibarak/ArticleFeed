@@ -1,12 +1,12 @@
-package com.mvvm.activities
+package com.feed.activities
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import android.util.Log
-import com.mvvm.application.RxApplication
-import com.mvvm.model.Article
-import com.mvvm.model.ArticleResponse
+import com.feed.application.RxApplication
+import com.feed.model.Article
+import com.feed.model.ArticleResponse
 import rx.Observer
 import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
@@ -19,7 +19,7 @@ import rx.schedulers.Schedulers
 
 class ArticleModel(application: Application) : AndroidViewModel(application) {
 
-
+    private var mTmeStamp: Long = 0
     private var ArticleList: JsonLiveData? = null
     private var subscription: Subscription? = null
 
@@ -40,7 +40,9 @@ class ArticleModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun refreshData() {
-        ArticleList = JsonLiveData()
+        if (System.currentTimeMillis() > mTmeStamp + 2000 ){
+            ArticleList = JsonLiveData()
+        }
     }
 
     inner class JsonLiveData() : MutableLiveData<List<Article>>() {
@@ -54,6 +56,7 @@ class ArticleModel(application: Application) : AndroidViewModel(application) {
             val service = RxApplication.instance_!!.networkService
             val articleResponseObservable = service!!.articleAPI.articles
             Log.e("netwo", "netwo")
+            mTmeStamp = System.currentTimeMillis()
             subscription = articleResponseObservable.observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
 

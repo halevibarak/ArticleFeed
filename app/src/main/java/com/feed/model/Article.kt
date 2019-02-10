@@ -1,4 +1,4 @@
-package com.mvvm.model
+package com.feed.model
 
 import com.google.gson.annotations.SerializedName
 

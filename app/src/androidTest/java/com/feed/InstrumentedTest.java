@@ -1,4 +1,4 @@
-package com.mvvm;
+package com.feed;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-public class ExampleInstrumentedTest {
+public class InstrumentedTest {
     @Test
     public void useAppContext() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();

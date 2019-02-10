@@ -1,4 +1,4 @@
-package com.mvvm.activities;
+package com.feed.activities;
 
 import org.junit.Test;
 

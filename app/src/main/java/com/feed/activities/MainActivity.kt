@@ -1,10 +1,10 @@
-package com.mvvm.activities
+package com.feed.activities
 
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 
-import com.mvvm.R
+import com.feed.R
 
 /**
  * Created by Barak on 24/08/2017.
