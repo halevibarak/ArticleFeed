@@ -7,6 +7,6 @@ import com.google.gson.annotations.SerializedName
  */
 
 class ArticleResponse(@field:SerializedName("articles")
-                      var articles: List<Article>)
+                      var articles: ArrayList<Article>)
 
 

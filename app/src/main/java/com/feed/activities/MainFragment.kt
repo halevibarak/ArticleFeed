@@ -17,15 +17,13 @@ import com.feed.adapter.ArticleAdapter
 import com.feed.adapter.ArticleDecoration
 import com.feed.interfaces.DescriptionInterface
 import com.feed.model.Article
-import rx.Subscription
 import java.util.*
 
 
 class MainFragment : Fragment(), DescriptionInterface {
     private var contactsAdapter: ArticleAdapter? = null
-    private var articles: List<Article>? = null
+    private var articles: ArrayList<Article>? = null
     private var mProgressView: ProgressBar? = null
-    private var subscription: Subscription? = null
     private var postModel: ArticleModel? = null
     private var recyclerView: RecyclerView? = null
 
@@ -40,25 +38,24 @@ class MainFragment : Fragment(), DescriptionInterface {
         postModel = ViewModelProviders.of(this).get(ArticleModel::class.java)
         postModel!!.articleList!!.observe(this, Observer { articles_ ->
             mProgressView!!.visibility = View.GONE
-            this.articles = articles_
-            updateUI()
+            if (articles==null){
+                this.articles = articles_
+                updateUI()
+            }else{
+                if (articles_!=null)
+                for (art in articles_) {
+                    this.articles!!.add(art)
+                }
+                contactsAdapter!!.notifyDataSetChanged()
+            }
         })
         return rootView
-    }
-
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        articles = ArrayList()
-
-
     }
 
     override fun goToDescription(url_: String) {
         val fragment = WebFragment()
         val bundle = Bundle()
         bundle.putString(WebFragment.LINK, url_)
-
         fragment.arguments = bundle
         val transaction = activity!!.supportFragmentManager.beginTransaction()
         transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.fade_in, R.anim.fade_out)
@@ -74,7 +71,6 @@ class MainFragment : Fragment(), DescriptionInterface {
             } else {
                 mProgressView!!.visibility = View.GONE
                 contactsAdapter = ArticleAdapter(articles, this)
-
                 recyclerView!!.visibility = View.VISIBLE
                 recyclerView!!.layoutManager = LinearLayoutManager(recyclerView!!.context)
                 recyclerView!!.addItemDecoration(ArticleDecoration(dpToPx(10)))
@@ -86,18 +82,6 @@ class MainFragment : Fragment(), DescriptionInterface {
 
 
     }
-
-    fun rxUnSubscribe() {
-        if (subscription != null && !subscription!!.isUnsubscribed)
-            subscription!!.unsubscribe()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        rxUnSubscribe()
-    }
-
-
 
     override fun onResume() {
         super.onResume()
@@ -120,7 +104,6 @@ class MainFragment : Fragment(), DescriptionInterface {
         contactsAdapter = null
         articles = null
         mProgressView = null
-        subscription = null
         postModel = null
         recyclerView = null
     }

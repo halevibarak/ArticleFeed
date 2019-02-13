@@ -2,6 +2,7 @@ package com.feed.activities
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
+import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.MutableLiveData
 import android.util.Log
 import com.feed.application.RxApplication
@@ -19,65 +20,56 @@ import rx.schedulers.Schedulers
 
 class ArticleModel(application: Application) : AndroidViewModel(application) {
 
+    private val mediatorLiveData = MediatorLiveData<List<Article>>()
+    private var ArticleList= JsonLiveData()
     private var mTmeStamp: Long = 0
-    private var ArticleList: JsonLiveData? = null
+
     private var subscription: Subscription? = null
 
-
-    private val refresh = MutableLiveData<Int>()
-
-    val articleList: MutableLiveData<List<Article>>?
+    val articleList: JsonLiveData
         get() = ArticleList
 
     init {
-        if (ArticleList == null)
-            ArticleList = JsonLiveData()
-
+        mediatorLiveData.addSource(ArticleList, { mediatorLiveData.value = it })
     }
-
     override fun onCleared() {
         subscription!!.unsubscribe()
     }
 
     fun refreshDataIfNeeded() {
-        if (System.currentTimeMillis() > mTmeStamp + 5000 ){
+        if (System.currentTimeMillis() > mTmeStamp + 5000) {
+            mediatorLiveData.removeSource(ArticleList)
             ArticleList = JsonLiveData()
+            mediatorLiveData.addSource(ArticleList, {
+                mediatorLiveData.value = it
+                ArticleList = JsonLiveData()
+            })
         }
     }
 
-    inner class JsonLiveData() : MutableLiveData<List<Article>>() {
+    inner class JsonLiveData : MutableLiveData<ArrayList<Article>>() {
 
         init {
-            LoadData()
+            loadData()
         }
 
-
-        private fun LoadData() {
+        private fun loadData() {
             val service = RxApplication.instance_!!.networkService
             val articleResponseObservable = service!!.articleAPI.articles
             Log.d("network", "network network network network network network network ")
             mTmeStamp = System.currentTimeMillis()
             subscription = articleResponseObservable.observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
-
                     .subscribe(object : Observer<ArticleResponse> {
                         override fun onCompleted() {}
-
                         override fun onError(e: Throwable) {
                             value = null
-                            refresh.value = 1
                         }
 
                         override fun onNext(response: ArticleResponse) {
                             value = response.articles
-                            refresh.value = 1
                         }
                     })
-
         }
-
-
     }
-
-
 }
