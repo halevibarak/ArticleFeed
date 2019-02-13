@@ -16,7 +16,6 @@ import com.feed.model.Article;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -27,19 +26,16 @@ import java.util.TimeZone;
 
 public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder> {
 
-    private List<Article> fullContactCellList;
+    private List<Article> mArticleList;
     private DescriptionInterface mLisenner;
-    private List<Article> mFilterData;
     @SuppressLint("SimpleDateFormat")
     DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
     @SuppressLint("SimpleDateFormat")
     DateFormat SimpleDateFormatUI = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
 
 
-    public ArticleAdapter(List<Article> contactList, DescriptionInterface listenner) {
-        this.fullContactCellList = contactList;
-        mFilterData = new ArrayList<>();
-        mFilterData.addAll(fullContactCellList);
+    public ArticleAdapter(List<Article> articleList, DescriptionInterface listenner) {
+        this.mArticleList = articleList;
         mLisenner = listenner;
         sdf.setTimeZone(TimeZone.getTimeZone("IL"));
     }
@@ -47,11 +43,11 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
 
     @Override
     public int getItemCount() {
-        return mFilterData.size();
+        return mArticleList.size();
     }
 
     public Article getItem(int position) {
-        return mFilterData.get(position);
+        return mArticleList.get(position);
     }
 
     @Override
@@ -79,8 +75,8 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
                 e.printStackTrace();
             }
             Glide.with(holder.imgView.getContext()).load(article.getUrlToImage()).into(holder.imgView);
+            holder.itemView.setOnClickListener(v -> mLisenner.goToDescription(article.getUrl()));
         }
-        holder.itemView.setOnClickListener(v -> mLisenner.goToDescription(article.getUrl()));
     }
 
     public class ArticleViewHolder extends RecyclerView.ViewHolder {
@@ -91,9 +87,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
             titleView =  itemView.findViewById(R.id.title_text);
             dateView =  itemView.findViewById(R.id.date_text);
             imgView   =  itemView.findViewById(R.id.img_view);
-
         }
-
         private final ImageView imgView;
         TextView titleView;
         TextView dateView;

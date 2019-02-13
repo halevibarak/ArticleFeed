@@ -30,13 +30,11 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
     }
 
     fun shouldDisplayHomeUp() {
-        //Enable Up button only  if there are entries in the back stack
         val canGoBack = supportFragmentManager.backStackEntryCount > 0
         supportActionBar!!.setDisplayHomeAsUpEnabled(canGoBack)
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        //This method is called when the up button is pressed. Just the pop back stack.
         supportFragmentManager.popBackStack()
         return true
     }

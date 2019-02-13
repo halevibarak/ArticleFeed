@@ -40,10 +40,10 @@ class ArticleModel(application: Application) : AndroidViewModel(application) {
         if (System.currentTimeMillis() > mTmeStamp + 5000) {
             mediatorLiveData.removeSource(ArticleList)
             ArticleList = JsonLiveData()
-            mediatorLiveData.addSource(ArticleList, {
+            mediatorLiveData.addSource(ArticleList) {
                 mediatorLiveData.value = it
                 ArticleList = JsonLiveData()
-            })
+            }
         }
     }
 
