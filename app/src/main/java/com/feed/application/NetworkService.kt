@@ -8,9 +8,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import rx.Observable
 
-/**
- * Created by Barak Halevi on 07/11/2018.
- */
+
+
+
 class NetworkService  {
     val articleAPI: ArticleInterface
 

@@ -4,7 +4,6 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.MutableLiveData
-import android.util.Log
 import com.feed.application.RxApplication
 import com.feed.model.Article
 import com.feed.model.ArticleResponse
@@ -14,9 +13,8 @@ import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
 
-/**
- * Created by Barak on 1/10/2018.
- */
+
+
 
 class ArticleModel(application: Application) : AndroidViewModel(application) {
 
@@ -56,7 +54,6 @@ class ArticleModel(application: Application) : AndroidViewModel(application) {
         private fun loadData() {
             val service = RxApplication.instance_!!.networkService
             val articleResponseObservable = service!!.articleAPI.articles
-            Log.d("network", "network network network network network network network ")
             mTmeStamp = System.currentTimeMillis()
             subscription = articleResponseObservable.observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())

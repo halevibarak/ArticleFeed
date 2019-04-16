@@ -4,9 +4,8 @@ import android.graphics.Rect
 import android.support.v7.widget.RecyclerView
 import android.view.View
 
-/**
- * Created by Barak on 24/08/2017.
- */
+
+
 
 class ArticleDecoration(private val space: Int) : RecyclerView.ItemDecoration() {
 

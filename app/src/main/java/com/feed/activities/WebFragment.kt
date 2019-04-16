@@ -3,13 +3,12 @@ package com.feed.activities
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.*
-import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.feed.R
+import kotlinx.android.synthetic.main.fragment_web.*
 
 
 class WebFragment : Fragment() {
-    private var mWebView: WebView? = null
 
     val link: String
         get() {
@@ -27,30 +26,25 @@ class WebFragment : Fragment() {
         val rootView = inflater.inflate(
                 R.layout.fragment_web, container, false)
         retainInstance = true
-
-        mWebView = rootView.findViewById(R.id.web_view2)
-        val webSettings = mWebView!!.settings
+        return rootView
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val webSettings = webView.settings
         webSettings.javaScriptEnabled = true
-        mWebView!!.webViewClient = WebViewClient()
-        mWebView!!.loadUrl(link)
-        mWebView!!.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+        webView.webViewClient = WebViewClient()
+        webView.loadUrl(link)
+        webView.setOnKeyListener(View.OnKeyListener {  _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_BACK
                     && event.action == MotionEvent.ACTION_UP
-                    && mWebView!!.canGoBack()) {
-                mWebView!!.goBack()
+                    && webView.canGoBack()) {
+                webView.goBack()
                 return@OnKeyListener true
             }
             false
         })
-        return rootView
     }
-
     companion object {
         const val LINK = "LINK"
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        mWebView=null
-    }
 }

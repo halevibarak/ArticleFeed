@@ -4,9 +4,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
 
-/**
- * Created by Barak Halevi on 09/02/2019.
- */
+
+
 public class WebFragmentTest {
 
     @Test

@@ -3,12 +3,9 @@ package com.feed.activities
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
-
 import com.feed.R
 
-/**
- * Created by Barak on 24/08/2017.
- */
+
 class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedListener {
 
 
@@ -17,7 +14,7 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, MainFragment.newInstance())
+                    .replace(R.id.container, MainFragment())
                     .commitNow()
         }
         supportFragmentManager.addOnBackStackChangedListener(this)
