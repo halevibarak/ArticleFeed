@@ -11,10 +11,12 @@ import com.bumptech.glide.Glide
 import com.feed.R
 import com.feed.interfaces.DescriptionInterface
 import com.feed.model.Article
+import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.contact_item.view.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlinx.android.synthetic.main.contact_item.*
 
 
 class ArticleAdapter(private val mArticleList: ArrayList<Article>, private val mLisenner: DescriptionInterface) : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
@@ -47,33 +49,24 @@ class ArticleAdapter(private val mArticleList: ArrayList<Article>, private val m
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
+        holder.bind(mArticleList[position])
 
-        val article = getItem(position)
-        if (article != null) {
-            holder.titleView.text = article.title
+    }
+
+    inner class ArticleViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+        fun bind(article: Article) {
+            title_text.text = article.title
             try {
                 val date = sdf.parse(article.publishedAt)
-                holder.dateView.text = SimpleDateFormatUI.format(date)
+                date_text.text = SimpleDateFormatUI.format(date)
             } catch (e: ParseException) {
                 e.printStackTrace()
             }
+            Glide.with(containerView).load(article.urlToImage).into(img_view)
+            containerView.setOnClickListener { mLisenner.goToDescription(article.url) }
 
-            Glide.with(holder.imgView.context).load(article.urlToImage).into(holder.imgView)
-            holder.itemView.setOnClickListener { mLisenner.goToDescription(article.url) }
         }
-    }
 
-    inner class ArticleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-         val imgView: ImageView
-         var titleView: TextView
-         var dateView: TextView
-
-
-        init {
-            titleView = itemView.title_text
-            dateView = itemView.date_text;
-            imgView = itemView.img_view
-        }
     }
 
 

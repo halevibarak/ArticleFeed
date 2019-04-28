@@ -2,6 +2,7 @@ package com.feed.activities
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -83,13 +84,6 @@ class MainFragment : android.support.v4.app.Fragment(), DescriptionInterface {
 
     }
 
-    companion object {
-
-    }
-
-    fun newInstance(): MainFragment {
-        return MainFragment()
-    }
     fun dpToPx(dp: Int): Int {
         return (dp * Resources.getSystem().displayMetrics.density).toInt()
     }

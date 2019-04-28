@@ -6,6 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.POST
 import rx.Observable
 
 
@@ -26,7 +27,7 @@ class NetworkService  {
 
 
     interface ArticleInterface {
-        @get:GET("everything?q=bitcoin&sortBy=publishedAt&apiKey=3b6ed1bf2c3d457eb16dd72a9529deaa")
+        @get:GET("everything?q=bitcoin&from=2019-03-28&sortBy=publishedAt&apiKey=20db1cfcc97442bcb409ee97e3360cd9")
         val articles: Observable<ArticleResponse>
     }
 
