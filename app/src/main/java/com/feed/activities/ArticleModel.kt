@@ -5,7 +5,7 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.MutableLiveData
 import com.feed.application.RxApplication
-import com.feed.model.Article
+import com.feed.dao.Article
 import com.feed.model.ArticleResponse
 import rx.Observer
 import rx.Subscription
@@ -55,18 +55,18 @@ class ArticleModel(application: Application) : AndroidViewModel(application) {
             val service = RxApplication.instance_!!.networkService
             val articleResponseObservable = service!!.articleAPI.articles
             mTmeStamp = System.currentTimeMillis()
-            subscription = articleResponseObservable.observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe(object : Observer<ArticleResponse> {
-                        override fun onCompleted() {}
-                        override fun onError(e: Throwable) {
-                            value = null
-                        }
-
-                        override fun onNext(response: ArticleResponse) {
-                            value = response.articles
-                        }
-                    })
+//            subscription = articleResponseObservable.observeOn(AndroidSchedulers.mainThread())
+//                    .subscribeOn(Schedulers.io())
+//                    .subscribe(object : Observer<ArticleResponse> {
+//                        override fun onCompleted() {}
+//                        override fun onError(e: Throwable) {
+//                            value = null
+//                        }
+//
+//                        override fun onNext(response: ArticleResponse) {
+//                            value = response.articles
+//                        }
+//                    })
         }
     }
 }
